@@ -6,25 +6,39 @@
 > The full pipeline runs end-to-end: CAN mock → multi-camera sync → HDF5 recording → REST API → React dashboard.
 > 36/36 tests pass.
 
+> **Branch:** `linux` — Linux + vcan0. For macOS see the [`main` branch](../../tree/main).
+
 ---
 
-## Quick Start (mock mode, no hardware required)
+## Quick Start — Linux (mock mode, no real hardware required)
+
+Uses `vcan0` (virtual CAN via kernel module) so the socketcan path is fully exercised.
 
 ```bash
-# 1. Python backend
+# 1. Python deps
 pip install -e ".[dev]"
 
-# 2. Frontend
-cd dashboard && npm install && cd ..
+# 2. Set up vcan0 (once per boot)
+sudo modprobe vcan
+sudo ip link add dev vcan0 type vcan
+sudo ip link set vcan0 up
 
 # 3. Start everything
 make dev-mock
-# → vcan0 synthetic CAN frames
-# → FastAPI on :8000
+# → spawns mock_can producer on vcan0
+# → FastAPI on :8000 (MOCK=1)
 # → React dashboard on :5173
 ```
 
 Open `http://localhost:5173` — live joint plots, camera previews, Start/Stop recording.
+
+### Real hardware (can0)
+
+```bash
+make can-up       # configure CAN-FD interface, set txqueuelen 1000
+make record       # start FastAPI, POST /record/start to begin
+make stop         # POST /record/stop to finalize episode
+```
 
 ---
 
@@ -34,7 +48,7 @@ Open `http://localhost:5173` — live joint plots, camera previews, Start/Stop r
 
 Implemented in `Makefile` (`make can-up`) and `docs/can_protocol.md`.
 
-**No hardware screenshot** — development machine is macOS; the gs_usb / Peak adapters have no macOS driver. The `make can-up` target runs the exact SocketCAN commands from the OpenArm setup guide:
+**No hardware screenshot** — test system has no physical CAN adapter attached. The `make can-up` target runs the exact SocketCAN commands from the OpenArm setup guide:
 
 ```bash
 sudo ip link set can0 type can \
