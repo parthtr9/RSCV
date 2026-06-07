@@ -86,7 +86,7 @@ def _start_mock_hardware(joint_queue: queue.Queue) -> None:  # type: ignore[type
     from hardware.can_reader import CANReader
     import can
 
-    bus = can.Bus(interface="virtual", channel="vcan0")
+    bus = can.Bus(interface="socketcan", channel="vcan0")
     reader = CANReader(bus, joint_queue)
 
     producer_thread = threading.Thread(
