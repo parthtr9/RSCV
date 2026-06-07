@@ -1,0 +1,84 @@
+# Ground truth joint/motor/CAN-ID map.
+# Must stay in sync with hardware/damiao.py JOINT_MAP.
+# Do NOT hardcode these elsewhere — import from hardware.damiao.JOINT_MAP.
+
+joints:
+  - name: joint_1
+    motor_type: DM8009P
+    send_id: 0x01
+    recv_id: 0x11
+    notes: "High-torque shoulder"
+    limits:
+      p_max:  12.5   # rad
+      v_max:  45.0   # rad/s
+      t_max:  54.0   # Nm
+
+  - name: joint_2
+    motor_type: DM8009P
+    send_id: 0x02
+    recv_id: 0x12
+    notes: "High-torque shoulder"
+    limits:
+      p_max:  12.5
+      v_max:  45.0
+      t_max:  54.0
+
+  - name: joint_3
+    motor_type: DM4340
+    send_id: 0x03
+    recv_id: 0x13
+    notes: "Elbow"
+    limits:
+      p_max:  12.5
+      v_max:  50.0
+      t_max:  28.0
+
+  - name: joint_4
+    motor_type: DM4340P
+    send_id: 0x04
+    recv_id: 0x14
+    notes: "Elbow"
+    limits:
+      p_max:  12.5
+      v_max:  50.0
+      t_max:  28.0
+
+  - name: joint_5
+    motor_type: DM4310
+    send_id: 0x05
+    recv_id: 0x15
+    notes: "Wrist"
+    limits:
+      p_max:  12.5
+      v_max:  30.0
+      t_max:  10.0
+
+  - name: joint_6
+    motor_type: DM4310
+    send_id: 0x06
+    recv_id: 0x16
+    notes: "Wrist"
+    limits:
+      p_max:  12.5
+      v_max:  30.0
+      t_max:  10.0
+
+  - name: joint_7
+    motor_type: DM4310
+    send_id: 0x07
+    recv_id: 0x17
+    notes: "Wrist"
+    limits:
+      p_max:  12.5
+      v_max:  30.0
+      t_max:  10.0
+
+  - name: gripper
+    motor_type: DM4310
+    send_id: 0x08
+    recv_id: 0x18
+    notes: "Gripper"
+    limits:
+      p_max:  12.5
+      v_max:  30.0
+      t_max:  10.0

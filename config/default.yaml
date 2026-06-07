@@ -1,0 +1,43 @@
+recording:
+  fps: 30
+  sync_tolerance_ms: 15.0
+  output_dir: data/raw
+  flush_every_n_frames: 30
+
+cameras:
+  cam_left_wrist:
+    serial: "ArducamWristLeft_001"
+    width: 640
+    height: 480
+    fps: 60
+  cam_right_wrist:
+    serial: "ArducamWristRight_002"
+    width: 640
+    height: 480
+    fps: 60
+  cam_ceiling:
+    serial: "ArducamCeiling_003"
+    width: 640
+    height: 480
+    fps: 30
+  cam_zed:
+    serial: null   # ZED SDK handles identification
+    resolution: HD720
+    fps: 30
+
+can:
+  interface: socketcan
+  channel: can0
+  bitrate: 1000000
+  dbitrate: 5000000
+  txqueuelen: 1000
+
+api:
+  host: 0.0.0.0
+  port: 8000
+  cors_origins:
+    - "http://localhost:5173"
+
+mjpeg:
+  fps: 15
+  jpeg_quality: 70

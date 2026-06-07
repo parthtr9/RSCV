@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+*.so
+.env
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+
+# data
+data/raw/*.hdf5
+data/lerobot/
+
+# dashboard
+dashboard/node_modules/
+dashboard/dist/
+
+# editor
+.DS_Store
+.vscode/
+*.swp
