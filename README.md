@@ -6,22 +6,23 @@
 > The full pipeline runs end-to-end: CAN mock → multi-camera sync → HDF5 recording → REST API → React dashboard.
 > 36/36 tests pass.
 
+> **Branch:** `main` — macOS. For Linux see the [`linux` branch](../../tree/linux).
+
 ---
 
-## Quick Start (mock mode, no hardware required)
+## Quick Start — macOS (no hardware required)
+
+Uses python-can's built-in `virtual` interface. No `vcan0`, no `modprobe`, no `sudo`.
 
 ```bash
-# 1. Python backend
-pip install -e ".[dev]"
+# 1. Python deps
+pip3 install -e ".[dev]"
 
-# 2. Frontend
-cd dashboard && npm install && cd ..
+# 2. Terminal 1 — API (starts mock CAN producer automatically)
+MOCK=1 uvicorn api.main:app --reload --port 8000
 
-# 3. Start everything
-make dev-mock
-# → vcan0 synthetic CAN frames
-# → FastAPI on :8000
-# → React dashboard on :5173
+# 3. Terminal 2 — Dashboard
+cd dashboard && npm install && npm run dev
 ```
 
 Open `http://localhost:5173` — live joint plots, camera previews, Start/Stop recording.
