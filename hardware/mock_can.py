@@ -52,7 +52,7 @@ def _encode_feedback(
 
 
 def run(interface: str = "vcan0") -> None:
-    bus = can.Bus(interface="socketcan", channel=interface)
+    bus = can.Bus(interface="virtual", channel=interface)
     logger.info("MockCAN running on %s at %d Hz", interface, FREQ_HZ)
 
     period = 1.0 / FREQ_HZ
